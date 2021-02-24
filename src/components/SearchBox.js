@@ -1,9 +1,10 @@
-import React from 'react'
+import {useState,useContext} from "react";
+import MovieContext from "../context/MovieContext";
 
-import {useState} from "react"
+const SearchBox = () => {
 
-const SearchBox = (props) => {
 
+    const {filterMovies} = useContext(MovieContext);
     const [searchBox ,setSearchBox] = useState("")
 
     return (
@@ -14,7 +15,7 @@ const SearchBox = (props) => {
                 value={searchBox}  onChange={(evt)=>{
                     
                     setSearchBox(evt.target.value);
-                    props.onFilter(evt.target.value);
+                   filterMovies(evt.target.value);
 
                    
                 }}/>

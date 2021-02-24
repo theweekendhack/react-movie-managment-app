@@ -1,11 +1,18 @@
-import React from 'react'
+import {useContext} from 'react';
+import ModalContext from "../context/ModalContext";
+import {Link} from "react-router-dom"
+
+
 
 const Header = (props) => {
+
+    const {toogleAddForm} = useContext(ModalContext);
     return (
-        <header className="grid grid-col-1-200px">
-                <h1>Movie Managment System</h1>
+        <header className="grid grid-col-3">
+                <h1><Link to="/"> Managment System</Link></h1>
+                <Link className="grid-x-center" to="/about-us">About Us</Link>
                 <button onClick={()=>{
-                    props.onToogleAddForm()
+                    toogleAddForm()
                 }} className="btn btn-primary grid-x-right"  type="button" > Add movie</button>
         </header>
     )

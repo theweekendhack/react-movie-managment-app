@@ -1,11 +1,15 @@
-import React from 'react';
-
-import {useState} from "react";
-
-
+import MovieContext from "../context/MovieContext";
+import ModalContext from "../context/ModalContext";
+import {useState,useContext} from "react";
 
 
-const AddMovieForm = (props) => {
+
+
+const AddMovieForm = () => {
+
+
+    const {addMovie}  = useContext(MovieContext);
+    const {addFormState} = useContext(ModalContext);
 
     const [title, setTitle]  = useState("");
     const [description, setDescription]  = useState("");
@@ -13,7 +17,7 @@ const AddMovieForm = (props) => {
     const [errorDescription, setErrorDescription]  = useState("");
 
 
-    const validateForm = (props)=>{
+    const validateForm = ()=>{
 
         let isValidated = true;
 
@@ -47,7 +51,7 @@ const AddMovieForm = (props) => {
 
 
     return (
-        <section className ={props.addFormState ? "" : "hide"}>
+        <section className ={addFormState ? "" : "hide"}>
         <form>
             <div className="form-control-container">
 
@@ -85,7 +89,7 @@ const AddMovieForm = (props) => {
                                description
                            }
 
-                           props.onAddMovie(newMovie)
+                           addMovie(newMovie)
 
                            //clear the title and description
 

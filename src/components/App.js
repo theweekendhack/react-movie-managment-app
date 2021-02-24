@@ -1,11 +1,8 @@
-import React from 'react' 
-
-import Modal from "./Modal";
-import Header from "./Header";
-import SearchBox from "./SearchBox";
-import AddMovieForm from "./AddMovieForm";
-import MovieList from "./MovieList";
-import Footer from "./Footer";
+import {BrowserRouter as Router,Switch, Route}  from "react-router-dom"
+import MovieContext from "../context/MovieContext";
+import ModalContext from "../context/ModalContext";
+import Home from "../pages/Home";
+import AboutUs from "../pages/About";
 
 import "../css/App.css";
 
@@ -111,14 +108,21 @@ const App = () => {
 
     return (
         <div  className="container">
-            <Modal onHide={hideModal}   modalState={modal}/>
-            <Header  onToogleAddForm= {toogleAddForm}/>
-            <SearchBox  onFilter={filterMovies}/>
-            <main>
-                <AddMovieForm addFormState={addFormState} onAddMovie={addMovie}/>
-                <MovieList  movies={movies} onDeleteMovie = {deleteMovie}/>
-            </main>
-            <Footer/>
+
+            <MovieContext.Provider value={{movies, filterMovies, addMovie, deleteMovie}}>
+                <ModalContext.Provider value={{modal,hideModal,toogleAddForm,addFormState}}>
+                    <Router>
+                        <Switch>
+                            <Route exact path ="/">
+                                <Home/>
+                            </Route>
+                            <Route path="/about-us">
+                                <AboutUs/>
+                            </Route>
+                        </Switch>
+                    </Router>
+                </ModalContext.Provider>
+            </MovieContext.Provider>
         </div>
     )
 }

@@ -1,14 +1,18 @@
-import React from 'react'
+import {useContext} from 'react';
+import ModalContext from "../context/ModalContext";
 
-const Modal = (props) => {
+const Modal = () => {
+
+    const {modal,hideModal} = useContext(ModalContext);
+
     return (
-        <div  className={props.modalState.visible === true ? "" : "hide"} onClick={()=>{
+        <div  className={modal.visible === true ? "" : "hide"} onClick={()=>{
 
-            props.onHide()
+            hideModal()
         }}>
 
         <div className="modal" >
-            <div className="modal-container">{props.modalState.msg}</div>
+            <div className="modal-container">{modal.msg}</div>
         </div>
 
     </div>
